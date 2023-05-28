@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Content} from '../helper-files/content-interface';
+import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-list',
@@ -7,40 +7,93 @@ import { Content} from '../helper-files/content-interface';
   styleUrls: ['./content-list.component.scss']
 })
 export class ContentListComponent {
-  public contents: Content[] = [
+  contents: Content[] = [
     {
       id: 1,
       title: 'Naruto',
-      image: 'assets/img/img1.jpg',
       description: 'NARUTO',
       creator: 'Creator 1',
-      type: 'Type 1',
-      tags: ['Tag 1', 'Tag 2', 'Tag 3']
+      imgURL: 'assets/img/img1.jpg',
+      type: 'Funny',
+      tags: ['movie, 2011'],
+      highlight: false
     },
-
     {
       id: 2,
       title: 'Demon Slayer',
-      image: 'assets/img/img2.jpg',
       description: 'DEMON SLAYER',
       creator: 'Creator 2',
-      type: 'Type 2',
-      tags: ['Tag 1', 'Tag 2', 'Tag 3']
+      imgURL: 'assets/img/img2.jpg',
+      type: 'Action',
+      tags: ['movie, 2011'],
+      highlight: false
     },
-
     {
       id: 3,
       title: 'Black Clover',
-      image: 'assets/img/img3.jpg',
       description: 'BLACK CLOVER',
       creator: 'Creator 3',
-      type: 'Type 3',
-      tags: ['Tag 1', 'Tag 2', 'Tag 3']
+      imgURL: 'assets/img/img3.jpg',
+      type: '',
+      tags: ['movie, 2012'],
+      highlight: false
     },
-   
-  ];
+    {
+      id: 4,
+      title: 'Hunter × Hunter',
+      description: 'Hunter × Hunter',
+      creator: 'Creator4',
+      imgURL: 'assets/img/img4.jpg',
+      type: 'Funny',
+      tags: ['movie, 2012'],
+      highlight: false
+    },
+    {
+      id: 5,
+      title: 'Death Note',
+      description: 'Death Note',
+      creator: 'Creator5',
+      imgURL: 'assets/img/img5.jpg',
+      type: 'Action',
+      tags: ['Mystery, 2012'],
+      highlight: false
+    },
+    {
+      id: 6,
+      title: 'One Piece',
+      description: 'One Piece',
+      creator: 'Creator6',
+      imgURL: 'assets/img/img6.jpg',
+      type: '',
+      tags: ['Adventure, 2012'],
+      highlight: false
+    },
+    {
+      id: 7,
+      title: 'Tokyo Ghoul',
+      description: 'Tokyo Ghoul',
+      creator: 'Creator7',
+      imgURL: 'assets/img/img7.jpg',
+      type: 'Action',
+      tags: [' Animation, 2012'],
+      highlight: false
+    }
+  ]; 
 
-  handleClick(content: Content): void {
-    console.log(`Clicked on image with ID ${content.id} and title ${content.title}`);
+  types: string[] = ['Funny', 'Action']; 
+  searchTitle: string = 'Naruto';
+  searchResultMessage: string = '';
+  searchResultExists: boolean = false;
+
+  searchContent(): void {
+    const foundContent = this.contents.find(content => content.type === this.searchTitle);
+
+    if (foundContent) {
+      this.searchResultMessage = `Content with type "${this.searchTitle}" exists.`;
+      this.searchResultExists = true;
+    } else {
+      this.searchResultMessage = `Content with type "${this.searchTitle}" does not exist.`;
+      this.searchResultExists = false;
+    }
   }
 }

@@ -3,7 +3,8 @@ export interface Content {
   title: string;
   description: string;
   creator: string;
-  type: string;
-  tags: string[];
-  image?: string; // Add the optional property with a '?' prefix
+  imgURL?: string;
+  type?: string;
+  tags?: string[];
+  highlight: boolean;
 }
