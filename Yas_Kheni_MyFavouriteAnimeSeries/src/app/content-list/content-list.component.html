@@ -1,10 +1,3 @@
-<app-content-card
-  *ngFor="let content of contents.slice(0, 5)"
-  [content]="content"
-
-  [class.border]="content.id === 1"
-></app-content-card>
-
 
 <!-- Display Content with no type -->
 <h2>Content with no type:</h2>
@@ -39,6 +32,23 @@
 <!-- Display Content list -->
 <ul>
   <li *ngFor="let content of contents" [ngClass]="{ 'highlighted': content.title === searchTitle }">
-    {{ content.title }}
+    <div class="card">
+      <h2>{{ content.title }}</h2>
+      <div class="image-container" *ngIf="content.imgURL">
+        <img [src]="content.imgURL" alt="{{ content.title }}" />
+      </div>
+      <div class="description" *ngIf="content.description">
+        <p>{{ content.description }}</p>
+      </div>
+      <div class="creator" *ngIf="content.creator">
+        <p>Creator: {{ content.creator }}</p>
+      </div>
+      <div class="type" *ngIf="content.type">
+        <p>Type: {{ content.type }}</p>
+      </div>
+      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
+        <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
+      </div>
+    </div>
   </li> 
 </ul>
