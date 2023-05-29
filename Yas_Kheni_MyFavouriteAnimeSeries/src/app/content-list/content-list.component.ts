@@ -89,10 +89,10 @@ export class ContentListComponent {
     const foundContent = this.contents.find(content => content.title === this.searchTitle);
 
     if (foundContent) {
-      this.searchResultMessage = `Content with type "${this.searchTitle}" exists.`;
+      this.searchResultMessage = `Content with title "${this.searchTitle}" exists.`;
       this.searchResultExists = true;
     } else {
-      this.searchResultMessage = `Content with type "${this.searchTitle}" does not exist.`;
+      this.searchResultMessage = `Content with title "${this.searchTitle}" does not exist.`;
       this.searchResultExists = false;
     }
   }
