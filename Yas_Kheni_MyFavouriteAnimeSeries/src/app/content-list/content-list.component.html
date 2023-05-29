@@ -1,37 +1,25 @@
-
-<!-- Display Content with no type -->
-<h2>Content with no type:</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter">{{ content.title }}</li>
-</ul>
-
-<!-- Display Content with type 'Type1' -->
-<h2>Content with type 'Funny':</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter:'Funny'">{{ content.title }}</li>
-</ul>
-
-<!-- Display Content with type 'Type2' -->
-<h2>Content with type 'Action':</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter:'Action'">{{ content.title }}</li>
-</ul>
-
-
 <!-- Search input field and button -->
 <div>
   <input type="text" [(ngModel)]="searchTitle" placeholder="Enter the title">
   <button (click)="searchContent()">Search</button>
 </div>
-
 <!-- Display search result message -->
 <div [ngStyle]="{ color: searchResultExists ? 'green' : 'red' }">
   {{ searchResultMessage }}
 </div>
 
+
 <!-- Display Content list -->
+
+  <div *ngFor="let content of contents" [ngClass]="{ 'highlighted': content.title === searchTitle }">
+    
+  </div> 
+
+
+<!-- Display Content with no type -->
+<h2>Content with no type:</h2>
 <ul>
-  <li *ngFor="let content of contents" [ngClass]="{ 'highlighted': content.title === searchTitle }">
+  <li *ngFor="let content of contents | contentFilter">
     <div class="card">
       <h2>{{ content.title }}</h2>
       <div class="image-container" *ngIf="content.imgURL">
@@ -50,5 +38,60 @@
         <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
       </div>
     </div>
-  </li> 
+  </li>
 </ul>
+
+<!-- Display Content with type 'Type1' -->
+<h2>Content with type 'Funny':</h2>
+<ul>
+  <li *ngFor="let content of contents | contentFilter:'Funny'">
+    <div class="card">
+      <h2>{{ content.title }}</h2>
+      <div class="image-container" *ngIf="content.imgURL">
+        <img [src]="content.imgURL" alt="{{ content.title }}" />
+      </div>
+      <div class="description" *ngIf="content.description">
+        <p>{{ content.description }}</p>
+      </div>
+      <div class="creator" *ngIf="content.creator">
+        <p>Creator: {{ content.creator }}</p>
+      </div>
+      <div class="type" *ngIf="content.type">
+        <p>Type: {{ content.type }}</p>
+      </div>
+      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
+        <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<!-- Display Content with type 'Type2' -->
+<h2>Content with type 'Action':</h2>
+<ul>
+  <li *ngFor="let content of contents | contentFilter:'Action'">
+    <div class="card">
+      <h2>{{ content.title }}</h2>
+      <div class="image-container" *ngIf="content.imgURL">
+        <img [src]="content.imgURL" alt="{{ content.title }}" />
+      </div>
+      <div class="description" *ngIf="content.description">
+        <p>{{ content.description }}</p>
+      </div>
+      <div class="creator" *ngIf="content.creator">
+        <p>Creator: {{ content.creator }}</p>
+      </div>
+      <div class="type" *ngIf="content.type">
+        <p>Type: {{ content.type }}</p>
+      </div>
+      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
+        <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+
+
+
