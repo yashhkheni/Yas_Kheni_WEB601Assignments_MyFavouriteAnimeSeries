@@ -86,7 +86,7 @@ export class ContentListComponent {
   searchResultExists: boolean = false;
 
   searchContent(): void {
-    const foundContent = this.contents.find(content => content.title === this.searchTitle);
+    const foundContent = this.contents.find(content => content.title.toLowerCase() === this.searchTitle.toLowerCase());
 
     if (foundContent) {
       this.searchResultMessage = `Content with title "${this.searchTitle}" exists.`;
