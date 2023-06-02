@@ -17,14 +17,22 @@
 
 
 <!-- Display Content with no type -->
+
+
+
+
+
 <h2>Content with no type:</h2>
 <ul>
   <li *ngFor="let content of contents | contentFilter">
     <div class="card">
       <h2>{{ content.title }}</h2>
-      <div class="image-container" *ngIf="content.imgURL">
-        <img [src]="content.imgURL" alt="{{ content.title }}" />
-      </div>
+      <div class="image-container">
+        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
+        <ng-template #defaultImg>
+          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
+        </ng-template>
+        </div>
       <div class="description" *ngIf="content.description">
         <p>{{ content.description }}</p>
       </div>
@@ -47,9 +55,12 @@
   <li *ngFor="let content of contents | contentFilter:'Funny'">
     <div class="card">
       <h2>{{ content.title }}</h2>
-      <div class="image-container" *ngIf="content.imgURL">
-        <img [src]="content.imgURL" alt="{{ content.title }}" />
-      </div>
+      <div class="image-container">
+        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
+        <ng-template #defaultImg>
+          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
+        </ng-template>
+        </div>
       <div class="description" *ngIf="content.description">
         <p>{{ content.description }}</p>
       </div>
@@ -72,9 +83,12 @@
   <li *ngFor="let content of contents | contentFilter:'Action'">
     <div class="card">
       <h2>{{ content.title }}</h2>
-      <div class="image-container" *ngIf="content.imgURL">
-        <img [src]="content.imgURL" alt="{{ content.title }}" />
-      </div>
+      <div class="image-container">
+        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
+        <ng-template #defaultImg>
+          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
+        </ng-template>
+        </div>
       <div class="description" *ngIf="content.description">
         <p>{{ content.description }}</p>
       </div>
