@@ -33,7 +33,7 @@ export class ContentListComponent {
       title: 'Black Clover',
       description: 'BLACK CLOVER',
       creator: 'Creator 3',
-      imgURL: 'assets/img/img3.jpg',
+      imgURL: '',
       type: '',
       tags: ['movie, 2012'],
       highlight: false
