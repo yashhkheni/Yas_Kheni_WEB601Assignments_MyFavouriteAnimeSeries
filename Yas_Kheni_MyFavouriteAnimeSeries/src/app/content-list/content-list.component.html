@@ -17,11 +17,6 @@
 
 
 <!-- Display Content with no type -->
-
-
-
-
-
 <h2>Content with no type:</h2>
 <ul>
   <li *ngFor="let content of contents | contentFilter">
@@ -40,7 +35,7 @@
         <p>Creator: {{ content.creator }}</p>
       </div>
       <div class="type" *ngIf="content.type">
-        <p>Type: {{ content.type }}</p>
+        <p appHoverAffect class="card-text">{{ content.type }}</p>
       </div>
       <div class="tags" *ngIf="content.tags && content.tags.length > 0">
         <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
@@ -48,6 +43,8 @@
     </div>
   </li>
 </ul>
+
+
 
 <!-- Display Content with type 'Type1' -->
 <h2>Content with type 'Funny':</h2>
@@ -68,7 +65,7 @@
         <p>Creator: {{ content.creator }}</p>
       </div>
       <div class="type" *ngIf="content.type">
-        <p>Type: {{ content.type }}</p>
+      <p appHoverAffect class="card-text">{{ content.type }}</p>
       </div>
       <div class="tags" *ngIf="content.tags && content.tags.length > 0">
         <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
@@ -96,7 +93,7 @@
         <p>Creator: {{ content.creator }}</p>
       </div>
       <div class="type" *ngIf="content.type">
-        <p>Type: {{ content.type }}</p>
+        <p appHoverAffect class="card-text">{{ content.type }}</p>
       </div>
       <div class="tags" *ngIf="content.tags && content.tags.length > 0">
         <p *ngFor="let tag of content.tags">Tag: {{ tag }}</p>
