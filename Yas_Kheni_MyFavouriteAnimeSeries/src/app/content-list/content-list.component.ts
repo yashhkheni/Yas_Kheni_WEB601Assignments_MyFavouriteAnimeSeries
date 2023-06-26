@@ -79,6 +79,11 @@ export class ContentListComponent {
       highlight: false
     }
   ]; 
+  handleContentAdded(newContent: Content): void {
+    const clonedContent = [...this.contents];
+    clonedContent.push(newContent);
+    this.contents = clonedContent;
+  }
 
   types: string[] = ['Funny', 'Action']; 
   searchTitle: string = 'Naruto';
