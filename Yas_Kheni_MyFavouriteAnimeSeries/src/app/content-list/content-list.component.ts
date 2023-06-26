@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
+import { FoodService } from '../services/food.service';
+
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.scss']
 })
-export class ContentListComponent {
+export class ContentListComponent implements OnInit {
   contents: Content[] = [
     {
       id: 1,
@@ -89,6 +91,13 @@ export class ContentListComponent {
   searchTitle: string = 'Naruto';
   searchResultMessage: string = '';
   searchResultExists: boolean = false;
+
+  constructor(private foodService: FoodService) { }
+  ngOnInit(): void {
+    this.foodService.getContent().subscribe((content: Content[]) => {
+      this.contents = content;
+    });
+  }
 
   searchContent(): void {
     const foundContent = this.contents.find(content => content.title.toLowerCase() === this.searchTitle.toLowerCase());
