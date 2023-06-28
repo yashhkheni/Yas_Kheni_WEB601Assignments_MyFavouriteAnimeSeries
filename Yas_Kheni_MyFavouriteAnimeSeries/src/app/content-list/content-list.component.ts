@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
+import { CreateContentComponent } from '../create-content/create-content.component';
 
 @Component({
   selector: 'app-content-list',
@@ -7,7 +8,7 @@ import { Content } from '../helper-files/content-interface';
   styleUrls: ['./content-list.component.scss']
 })
 export class ContentListComponent {
-  contents: Content[] = [
+  @Input() contents: Content[] = [
     {
       id: 1,
       title: 'Naruto',
@@ -78,10 +79,9 @@ export class ContentListComponent {
       tags: [' Animation, 2012'],
       highlight: false
     }
-  ]; 
-
-  types: string[] = ['Funny', 'Action']; 
-  searchTitle: string = 'Naruto';
+  ];
+  types: string[] = ['Funny', 'Action'];
+  searchTitle: string = '';
   searchResultMessage: string = '';
   searchResultExists: boolean = false;
 
@@ -95,5 +95,9 @@ export class ContentListComponent {
       this.searchResultMessage = `Content with title "${this.searchTitle}" does not exist.`;
       this.searchResultExists = false;
     }
+  }
+  onContentAdded(content: Content): void {
+    // Add the new content to the contents array
+    this.contents.push(content);
   }
 }

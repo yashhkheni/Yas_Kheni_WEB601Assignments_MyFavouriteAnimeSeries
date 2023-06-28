@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Content } from './helper-files/content-interface';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Yas_Kheni_MyFavouriteAnimeSeries';
+
+  onContentAdded(content: Content): void {
+    // Handle the emitted content object here
+    console.log('New content added:', content);
+  }
+  
+  
 }

@@ -1,0 +1,30 @@
+<div>
+    <h2>Create New Content</h2>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" [(ngModel)]="newContent.title" required>
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="newContent.description" required></textarea>
+    </div>
+    <div>
+      <label for="creator">Creator:</label>
+      <input type="text" id="creator" [(ngModel)]="newContent.creator" required>
+    </div>
+    <div>
+      <label for="imgURL">Image URL:</label>
+      <input type="text" id="imgURL" [(ngModel)]="newContent.imgURL">
+    </div>
+    <div>
+      <label for="type">Type:</label>
+      <input type="text" id="type" [(ngModel)]="newContent.type">
+    </div>
+    <div>
+      <label for="tags">Tags:</label>
+      <input type="text" id="tags" [(ngModel)]="newContent.tags" [ngModelOptions]="{ standalone: true }">
+    </div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <button (click)="createContent()">Create</button>
+  </div>
+  
