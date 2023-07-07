@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-list',
@@ -7,93 +6,101 @@ import { Content } from '../helper-files/content-interface';
   styleUrls: ['./content-list.component.scss']
 })
 export class ContentListComponent {
-  contents: Content[] = [
+
+  highlightedItemIndex: number = -1;
+  searchTitle: string = '';
+  searchResult: string = '';
+  isContentFound: boolean = false;
+  contentListArray: any[] = [];
+ 
+
+  constructor() {
+    // Initialize content list if needed
+     this.contentListArray = [
     {
       id: 1,
       title: 'Naruto',
-      description: 'NARUTO',
-      creator: 'Creator 1',
-      imgURL: 'assets/img/img1.jpg',
-      type: 'Funny',
-      tags: ['movie, 2011'],
-      highlight: false
+      description: 'Naruto Des',
+      creator: 'Masashi Kishimoto',
+      imgURL: './assets/img/img1.jpg',
+      type: 'Action',
+      tags: ['Action', 'Fight', 'Adventure']
     },
     {
       id: 2,
-      title: 'Demon Slayer',
-      description: 'DEMON SLAYER',
-      creator: 'Creator 2',
-      imgURL: 'assets/img/img2.jpg',
-      type: 'Action',
-      tags: ['movie, 2011'],
-      highlight: false
+      title: 'Death Note',
+      description: 'Death Note Des',
+      creator: 'Tsugumi Ohba',
+      imgURL: './assets/img/img5.jpg',
+      type: 'Suspence',
+      tags: ['Action', 'Suspence', 'Drama']
     },
     {
       id: 3,
       title: 'Black Clover',
-      description: 'BLACK CLOVER',
-      creator: 'Creator 3',
-      imgURL: '',
-      type: '',
-      tags: ['movie, 2012'],
-      highlight: false
+      description: 'Black Clover Des',
+      creator: 'Ayataka Tanemura',
+      imgURL: './assets/img/img3.jpg',
+      type: 'Action',
+      tags: ['Fight', 'Drama']
     },
     {
       id: 4,
-      title: 'Hunter × Hunter',
-      description: 'Hunter × Hunter',
-      creator: 'Creator4',
-      imgURL: 'assets/img/img4.jpg',
-      type: 'Funny',
-      tags: ['movie, 2012'],
-      highlight: false
+      title: 'Demon Slayer',
+      description: 'Demon Slayer Des',
+      creator: 'Koyoharu Gotouge',
+      imgURL: './assets/img/img2.jpg',
+      type: 'Suspence',
+      tags: ['Action', 'Suspence', 'Drama']
     },
     {
       id: 5,
-      title: 'Death Note',
-      description: 'Death Note',
-      creator: 'Creator5',
-      imgURL: 'assets/img/img5.jpg',
+      title: 'Hunter x Hunter',
+      description: 'Hunter x Hunter',
+      creator: 'Yoshihiro Togashi',
+      imgURL: './assets/img/img4.jpg',
       type: 'Action',
-      tags: ['Mystery, 2012'],
-      highlight: false
+      tags: ['Action', 'Drama', 'Suspence']
     },
     {
       id: 6,
-      title: 'One Piece',
-      description: 'One Piece',
-      creator: 'Creator6',
-      imgURL: 'assets/img/img6.jpg',
-      type: '',
-      tags: ['Adventure, 2012'],
-      highlight: false
+      title: 'One piece',
+      description: 'One piece des',
+      creator: 'Eiichiro Oda',
+      imgURL: './assets/img/img6.jpg',
+      type: 'Suspence',
+      tags: ['Adventure', 'Drama', 'Action']
     },
     {
       id: 7,
       title: 'Tokyo Ghoul',
-      description: 'Tokyo Ghoul',
-      creator: 'Creator7',
-      imgURL: 'assets/img/img7.jpg',
-      type: 'Action',
-      tags: [' Animation, 2012'],
-      highlight: false
-    }
-  ]; 
+      description: 'Tokyo Ghoul Des',
+      creator: 'Sui IshidaJohn Lennon, Paul McCartney,and Ringo Starr',
+      imgURL: './assets/img/img7.jpg',
+      type: 'Suspence',
+      tags: ['Action', 'Drama']
+    },
+  ];
+  }
 
-  types: string[] = ['Funny', 'Action']; 
-  searchTitle: string = 'Naruto';
-  searchResultMessage: string = '';
-  searchResultExists: boolean = false;
+  displayContent(contentItem: any) {
+    console.log('Content ID:', contentItem.id);
+    console.log('Content Title:', contentItem.title);
+  }
 
-  searchContent(): void {
-    const foundContent = this.contents.find(content => content.title.toLowerCase() === this.searchTitle.toLowerCase());
+  public searchContentItem() {
+    const foundItem = this.contentListArray.find(item => item.title === this.searchTitle);
+    this.isContentFound = !!foundItem;
+    this.searchResult = this.isContentFound ? 'Content item found!' : 'Content item not found!';
+ 
+  }
 
-    if (foundContent) {
-      this.searchResultMessage = `Content with title "${this.searchTitle}" exists.`;
-      this.searchResultExists = true;
-    } else {
-      this.searchResultMessage = `Content with title "${this.searchTitle}" does not exist.`;
-      this.searchResultExists = false;
-    }
+ 
+
+  receiveNewContent(newContent: any): void {
+    // Add the new content item to the content list
+    console.log("newContent",newContent);
+    this.contentListArray.push(newContent);
+    console.log('contentListArray',this.contentListArray);
   }
 }
