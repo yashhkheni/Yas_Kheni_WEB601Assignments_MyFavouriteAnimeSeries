@@ -1,108 +1,65 @@
-<!-- Search input field and button -->
+<app-create-content (contentAdded)="receiveNewContent($event)"></app-create-content>
+
+<p>content-list works!</p>
+
 <div>
-  <input type="text" [(ngModel)]="searchTitle" placeholder="Enter the title">
-  <button (click)="searchContent()">Search</button>
-</div>
-<!-- Display search result message -->
-<div [ngStyle]="{ color: searchResultExists ? 'green' : 'red' }">
-  {{ searchResultMessage }}
+  <label for="searchTitle">Search Title:</label>
+  <input type="text" id="searchTitle" [(ngModel)]="searchTitle">
+  <button (click)="searchContentItem()">Search</button>
+  <p [style.color]="isContentFound ? 'green' : 'red'">{{ searchResult }}</p>
 </div>
 
-
-<!-- Display Content list -->
-
-  <div *ngFor="let content of contents" [ngClass]="{ 'highlighted': content.title === searchTitle }">
-    
-  </div> 
-
-
-<!-- Display Content with no type -->
-<h2>Content with no type:</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter">
-    <div class="card">
-      <h2>{{ content.title }}</h2>
-      <div class="image-container">
-        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
-        <ng-template #defaultImg>
-          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
-        </ng-template>
-        </div>
-      <div class="description" *ngIf="content.description">
-        <p>{{ content.description }}</p>
-      </div>
-      <div class="creator" *ngIf="content.creator">
-        <p>Creator: {{ content.creator }}</p>
-      </div>
-      <div class="type" *ngIf="content.type">
-        <p appHoverAffect="underline" class="card-text">{{ content.type }}</p>
-      </div>
-      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
-        <p *ngFor="let tag of content.tags" appHoverAffect="bold">Tag: {{ tag }}</p>
-      </div>      
-    </div>
-  </li>
-</ul>
+<h3>Content with no type</h3>
+<div *ngFor="let contentItem of contentListArray | contentFilter : ''; let isFirst = first; even as isEven" 
+     [style.border]="isFirst ? '2px solid black' : '1px solid black'"
+     [style.padding]="'10px'"
+     [style.margin]="'10px'"
+     [ngStyle]="{ 'color': contentItem.type === 'beach' ? 'green' : contentItem.type === 'Nature' ? 'blue' : contentItem.type === 'Mountains' ? 'pink' : contentItem.type === 'park' ? 'yellow' : 'grey' }">
+  <h2 class="content-card" [ngClass]="{ 'highlighted': isContentFound && contentItem.title === searchTitle }">{{ contentItem.title }}</h2>
+  <img *ngIf="contentItem.imgURL; else defaultImage" [src]="contentItem.imgURL" (click)="displayContent(contentItem)" height="700px" width="100%">
+  <p>{{ contentItem.description }}</p>
+  <p>{{ contentItem.creator }}</p>
+  <p *ngIf="contentItem.type" appHoverAffect [affectStyle]="'underline'" >{{ contentItem.type }}</p>
+  <ul *ngIf="contentItem.tags">
+    <li *ngFor="let tag of contentItem.tags" class="tag" appHoverAffect [affectStyle]="'bold'">{{ tag }}</li>
+  </ul>
+  <ng-template #defaultImage>
+    <img src="../../assets/img/img0.jpeg" width="100%" height="70%">
+  </ng-template>
+</div>
 
 
+<h3>Content with type Action</h3>
+<div *ngFor="let contentItem of contentListArray | contentFilter : 'Action'; let isFirst = first; even as isEven" 
+     [style.border]="isFirst ? '3px solid black' : '1px solid black'"
+     [ngStyle]="{ 'color': contentItem.type === 'beach' ? 'green' : contentItem.type === 'Nature' ? 'blue' : contentItem.type === 'Mountains' ? 'white' : contentItem.type === 'park' ? 'yellow' : 'grey' }">
+     <h2 class="content-card" [ngClass]="{ 'highlighted': isContentFound && contentItem.title === searchTitle }">{{ contentItem.title }}</h2>
+  <img *ngIf="contentItem.imgURL; else defaultImage" [src]="contentItem.imgURL" (click)="displayContent(contentItem)" height="700px" width="100%">
+  <p>{{ contentItem.description }}</p>
+  <p>{{ contentItem.creator }}</p>
+  <p *ngIf="contentItem.type" appHoverAffect [affectStyle]="'underline'">{{ contentItem.type }}</p>
+  <ul *ngIf="contentItem.tags">
+    <li *ngFor="let tag of contentItem.tags" class="tag" appHoverAffect [affectStyle]="'bold'">{{ tag }}</li>
+  </ul>
+  <ng-template #defaultImage>
+    <img src="../../assets/img/img0.jpeg" width="100%" height="70%">
+  </ng-template>
+</div>
 
-<!-- Display Content with type 'Type1' -->
-<h2>Content with type 'Funny':</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter:'Funny'">
-    <div class="card">
-      <h2>{{ content.title }}</h2>
-      <div class="image-container">
-        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
-        <ng-template #defaultImg>
-          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
-        </ng-template>
-        </div>
-      <div class="description" *ngIf="content.description">
-        <p>{{ content.description }}</p>
-      </div>
-      <div class="creator" *ngIf="content.creator">
-        <p>Creator: {{ content.creator }}</p>
-      </div>
-      <div class="type" *ngIf="content.type">
-      <p appHoverAffect="underline" class="card-text">{{ content.type }}</p>
-      </div>
-      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
-        <p *ngFor="let tag of content.tags" appHoverAffect="bold">Tag: {{ tag }}</p>
-      </div>      
-    </div>
-  </li>
-</ul>
-
-<!-- Display Content with type 'Type2' -->
-<h2>Content with type 'Action':</h2>
-<ul>
-  <li *ngFor="let content of contents | contentFilter:'Action'">
-    <div class="card">
-      <h2>{{ content.title }}</h2>
-      <div class="image-container">
-        <img *ngIf="content.imgURL; else defaultImg"  [src]="content.imgURL" class="card-img-top" alt="...">
-        <ng-template #defaultImg>
-          <img src="../../assets/img/img0.jpeg" class="card-img-top" alt="Default Image">
-        </ng-template>
-        </div>
-      <div class="description" *ngIf="content.description">
-        <p>{{ content.description }}</p>
-      </div>
-      <div class="creator" *ngIf="content.creator">
-        <p>Creator: {{ content.creator }}</p>
-      </div>
-      <div class="type" *ngIf="content.type">
-        <p appHoverAffect="underline" class="card-text">{{ content.type }}</p>
-      </div>
-      <div class="tags" *ngIf="content.tags && content.tags.length > 0">
-        <p *ngFor="let tag of content.tags" appHoverAffect="bold">Tag: {{ tag }}</p>
-      </div>      
-    </div>
-  </li>
-</ul>
-
-
-
-
-
+<h3>Content with type Suspence</h3>
+<div *ngFor="let contentItem of contentListArray | contentFilter : 'Suspence'; let isFirst = first;"
+     [style.border]="isFirst ? '2px solid black' : '1px solid black'"
+     
+     [ngStyle]="{ 'color': contentItem.type === 'beach' ? 'green' : contentItem.type === 'Nature' ? 'blue' : contentItem.type === 'Mountains' ? 'white' : contentItem.type === 'park' ? 'yellow' : 'grey' }">
+  <h2 class="content-card" [ngClass]="{ 'highlighted': isContentFound && contentItem.title === searchTitle }">{{ contentItem.title }}</h2>
+  <img *ngIf="contentItem.imgURL; else defaultImage" [src]="contentItem.imgURL" (click)="displayContent(contentItem)" height="700px" width="100%">
+  <p>{{ contentItem.description }}</p>
+  <p>{{ contentItem.creator }}</p>
+  <p *ngIf="contentItem.type" appHoverAffect [affectStyle]="'underline'">{{ contentItem.type }}</p>
+  <ul *ngIf="contentItem.tags">
+    <li *ngFor="let tag of contentItem.tags" class="tag" appHoverAffect [affectStyle]="'bold'">{{ tag }}</li>
+  </ul>
+  <ng-template #defaultImage>
+    <img src="../../assets/img/img0.jpeg" width="100%" height="70%">
+  </ng-template>
+</div>
