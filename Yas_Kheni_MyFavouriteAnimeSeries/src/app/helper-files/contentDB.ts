@@ -50,7 +50,7 @@ export const contentListArray = [
         description: 'One piece des',
         creator: 'Eiichiro Oda',
         imgURL: './assets/img/img6.jpg',
-        type: 'Suspence',
+        type: 'Funny',
         tags: ['Adventure', 'Drama', 'Action']
       },
       {
