@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { contentListArray } from '../helper-files/contentDb';
+import { contentListArray } from '../helper-files/contentDB';
 import { Observable } from 'rxjs';
 
 @Injectable({
